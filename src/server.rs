@@ -6,7 +6,7 @@ pub fn set(name: &str, value: &str, options: &CookieOptions) -> Result<(), Cooki
     let ctx = FullstackContext::current()
         .ok_or_else(|| CookieError::new("No server context available"))?;
 
-    ctx.add_response_header(
+    ctx.append_response_header(
         SET_COOKIE,
         HeaderValue::from_str(&options.build_header(name, value))
             .map_err(|e| CookieError::new(format!("Invalid cookie value: {}", e)))?,
